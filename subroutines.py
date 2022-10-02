@@ -4,6 +4,38 @@ from audiolazy import str2midi, midi2freq, midi2str, str2freq
 from thinkdsp import *
 from PIL import Image
 
+
+class Song():
+    def __init__(self, audio_path, tend=22):
+        self.audio_path = audio_path
+        self.tend = tend
+        self._load()
+        self._get_key()
+        self._get_tempo()
+        
+    def _load(self):
+        y, sr = librosa.load(self.audio_path)
+        self.y = y
+        self.sr = sr
+        
+    def _get_key(self, pentOn=True):
+        y_harmonic, y_percussive = librosa.effects.hpss(self.y)
+        tonal_frag = Tonal_Fragment(y_harmonic, self.sr, tend=self.tend) #analyse up to tend
+        tonal_frag.print_key()
+        key = tonal_frag.get_key()
+        self.root = key[:2].strip() #should find better way!
+        self.scale = key[2:].strip()
+        if pentOn:
+            self.scale  = key[2:].strip() + 'Pent'
+        else: 
+            self.scale  = key[2:].strip()
+    
+    def _get_tempo(self):
+        onset_env = librosa.onset.onset_strength(y=self.y, sr=self.sr)
+        self.tempo = librosa.beat.tempo(onset_envelope=onset_env, sr=self.sr)[0]
+        print('likely tempo: ',self.tempo)
+        
+#From: https://github.com/jackmcarthur/musical-key-finder 
 # class that uses the librosa library to analyze the key that an mp3 is in
 # arguments:
 #     waveform: an mp3 file loaded by librosa, ideally separated out from any percussive sources

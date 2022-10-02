@@ -41,25 +41,9 @@ image_index = 0  #this can be fed in as an argument, passed by image selector
 
 audio_path = './songs/' + audio_filename + audio_format
 
-y, sr = librosa.load(audio_path)
-y_harmonic, y_percussive = librosa.effects.hpss(y)
-tonal_frag = Tonal_Fragment(y_harmonic, sr, tend=22)
-tonal_frag.print_key()
-
-key = tonal_frag.get_key()
-key_letter = key[:2].strip() #should find better way!
-key_harmony = key[2:].strip()
-
-if pentOn:
-    scale = key_harmony + 'Pent'
-else: 
-    scale = key_harmony
+song = Song(audio_path) #loads song, finds key and tempo
     
-freqs = get_scale_freqs(start_note=key_letter + str(start_octave), octaves=n_octaves, scale=scale)
-
-onset_env = librosa.onset.onset_strength(y=y, sr=sr)
-tempo = librosa.beat.tempo(onset_envelope=onset_env, sr=sr)[0]
-print('likely tempo: ',tempo,'bpm')
+freqs = get_scale_freqs(start_note=song.root + str(start_octave), octaves=n_octaves, scale=song.scale)
 
 #####IMAGE###################################
 
@@ -82,17 +66,17 @@ pixels = np.array(imgR.convert('L'))/255 #normalize, could leaveas RGB then sepa
 
 
 ####SONIFICATION################################
-time_per_bar = beats_per_bar*60/tempo
+time_per_bar = beats_per_bar*60/song.tempo
 duration = n_bars*time_per_bar #seconds, need to set with tempo, key signature and # of bars
 
 print('sonification duration: ',round(duration,2),'seconds')
 
-wave_sonif = additive_synth(pixels, freqs, sr, duration)
+wave_sonif = additive_synth(pixels, freqs, song.sr, duration)
 wave_sonif.normalize(0.9)
 wave_sonif.write('./sonifications/' + image_name + '.wav')
 
 #####MIXING####################################
-
+#make sure there is a wav version, needed to load with thinkdsp
 if '.wav' in audio_path:
     wave_song = read_wave(audio_path)
 elif '.mp3' in audio_path:
