@@ -20,7 +20,7 @@ This Github repo shows the core algorithm that:
 
 Future development will include tonal and instrumental options for the sonification to respond to user's personalization.
 
-You can find a working example in `audio_match_sonification.ipynb` or `audio_match_sonification.py`. Within these files you will set the name of the song (an mp3 or wav file of the song must exist in `/songs`). You will also select the image from the catalog `WebbDemo.csv` by setting its index number. Running `audio_match_sonification.py` will generate an audio file of the image sonification in `/sonification` and a mix of the sonification and original audio in `/mixes`.
+You can find a working example in `spacetune_example.ipynb` or `spacetune_example.py`. Within these files you will set the name of the song (an mp3 or wav file of the song must exist in `/songs`). You will also select the image from the catalog `WebbDemo.csv` by setting its index number. Running `spacetune_example.py` will generate an audio file of the image sonification in `/sonification` and a mix of the sonification and original audio in `/mixes`.
 
 
 
