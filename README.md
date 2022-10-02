@@ -29,11 +29,17 @@ If you are logged in as a public profile, you may only retrieve data, you may no
 ### `/logs/add`
 - POST - Either POST JSON or a Form requests will add a new log to the database.
 
-### `/meidas`
-- GET - Will return all of the media information.
+### `/uploadsAud`
+- POST - Will allow the user to upload the custom audio.
 
-### `/medias/add`
-- POST - Will add a new media, JSON and Form posts are also allowed here.
+### `/delete`
+- POST - Will allow the user to delete the uploaded audio.
+
+### `/select`
+- GET - Will let the user to choose one image from the image list.
+
+### `/result`
+- GET - Will export the audio file to the user's local directory.
 
 ### `/users`
 - GET - If authenticated user has a role of `mission control` it will return a listing of all names in the database. If the user is anything else it will return only the user's first and last name.
