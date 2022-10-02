@@ -20,8 +20,26 @@ To log in go to the /login endpoint at http://ec2-18-221-105-205.us-east-2.compu
 
 If you are logged in as a public profile, you may only retrieve data, you may not input any kind of data. If you are logged in as not public, you can upload meida and logs to the database as well as retrieve.
 
-/login
-GET - You can perform a get request ot login to the server. It will return a cookie to be used for all other sessions
+### `/login
+- GET - You can perform a get request ot login to the server. It will return a cookie to be used for all other sessions
+
+### `/logs`
+- GET - Will return all of the logs.
+
+### `/logs/add`
+- POST - Either POST JSON or a Form requests will add a new log to the database.
+
+### `/meidas`
+- GET - Will return all of the media information.
+
+### `/medias/add`
+- POST - Will add a new media, JSON and Form posts are also allowed here.
+
+### `/users`
+- GET - If authenticated user has a role of `mission control` it will return a listing of all names in the database. If the user is anything else it will return only the user's first and last name.
+
+### `/logout`
+- GET - Log out of the current user and purge the session.
 
 
 
