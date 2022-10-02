@@ -8,6 +8,13 @@ from PIL import Image
 import pandas as pd 
 import urllib.request
 from subroutines import *
+        
+        
+#####choose image from catalog#########################
+
+image_urls_path = 'WebbDemo.csv'  
+
+image_index = 0  #this can be fed in as an argument, passed by image selector
 
 #####choose song#########
 
@@ -25,12 +32,6 @@ beats_per_bar = 4  #assume 4/4, doesn't matter much
 n_bars = 16   #number of bars before looping sonification
 
 mix = 0.6 #0 to 1 
-
-#####choose image#########################
-
-image_urls_path = 'WebbDemo.csv'  
-
-image_index = 0  #this can be fed in as an argument, passed by image selector
 
 ######################################################################
 ####load and analyze song##################################################

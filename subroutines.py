@@ -34,7 +34,7 @@ class Song():
     def _get_tempo(self):
         onset_env = librosa.onset.onset_strength(y=self.y, sr=self.sr)
         self.tempo = librosa.beat.tempo(onset_envelope=onset_env, sr=self.sr)[0]
-        print('likely tempo: ',self.tempo)
+        print('likely tempo: ',self.tempo,'bpm')
         
         
 class ImageCatalog():
