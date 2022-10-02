@@ -96,14 +96,24 @@ source hackathon/bin/activate
 pip install -r requirements.txt
 ```
 
-## Running
+### Create the Database
+Since you have set up the environemnt, you could set up the database by running this line:
 
-After things have been installed, the server can be started.
-We will need to export the name of the file to run.
-
-```shell
-EXPORT FLASK_APP=api
-flask run --host=0.0.0.0
+```bash
+chmod +x ./bin/insta485db
+./bin/insta485db create
 ```
 
-This will run the Flask API server on the machine, defaulting to port 5000.
+This will create simple SQLite database to store images that used later.
+And if you want to drop the database, you can type:
+
+```bash
+./bin/insta485db destroy
+```
+
+
+
+### Runing the Algorithm
+
+
+
