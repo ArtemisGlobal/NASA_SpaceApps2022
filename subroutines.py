@@ -3,7 +3,8 @@ import librosa
 from audiolazy import str2midi, midi2freq, midi2str, str2freq
 from thinkdsp import *
 from PIL import Image
-
+import pandas as pd
+import urllib.request
 
 class Song():
     def __init__(self, audio_path, tend=22):
@@ -35,6 +36,32 @@ class Song():
         self.tempo = librosa.beat.tempo(onset_envelope=onset_env, sr=self.sr)[0]
         print('likely tempo: ',self.tempo)
         
+        
+class ImageCatalog():
+    def __init__(self,image_csv_path):
+        self.image_csv_path = image_csv_path
+        self._get_metadata()
+        
+    def _get_metadata(self):
+        cols = ['ImageName','FileDir','CollectDate','Instrument'] #columns in image list csv
+        df = pd.read_csv(self.image_csv_path, header=0, usecols=cols,skip_blank_lines=True,encoding='utf-8')#'latin1'
+        self.image_names = df['ImageName'].tolist()
+        self.image_urls = df['FileDir'].tolist()
+        
+    def get_image_path(self, image_index):
+        image_url = self.image_urls[image_index] 
+        image_name = self.image_names[image_index]
+        if '.jpg' in image_url:
+            image_format = '.jpg'
+        elif '.png' in image_url:
+            image_format = '.png'   
+        image_path = './images/' + image_name + image_format
+        urllib.request.urlretrieve(image_url, image_path)
+        return image_path
+    
+    def get_image_name(self, image_index):
+        return self.image_names[image_index]
+    
 class Sonification():
     def __init__(self, image_path,song,freqs,sonif_duration):
         self.image_path = image_path

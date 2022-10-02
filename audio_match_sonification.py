@@ -33,7 +33,7 @@ image_urls_path = 'WebbDemo.csv'
 image_index = 0  #this can be fed in as an argument, passed by image selector
 
 ######################################################################
-####analyse audio##################################################
+####load and analyze song##################################################
 
 audio_path = './songs/' + audio_filename + audio_format
 
@@ -41,19 +41,11 @@ song = Song(audio_path) #loads song, finds key and tempo
     
 freqs = get_scale_freqs(start_note=song.root + str(start_octave), octaves=n_octaves, scale=song.scale)
 
-#####DOWNLOAD IMAGE###################################
-cols = ['ImageName','FileDir','CollectDate','Instrument'] #columns in image list csv
+#####DOWNLOAD IMAGE, get path###################################
+#should also delete image file at end
 
-df = pd.read_csv(image_urls_path, header=0, usecols=cols,skip_blank_lines=True,encoding='utf-8')#'latin1'
-image_names = df['ImageName'].tolist()
-image_urls = df['FileDir'].tolist()
-
-
-image_url = image_urls[image_index] 
-image_name = image_names[image_index]
-image_format = image_url[-4:]
-image_path = './images/' + image_name + image_format
-urllib.request.urlretrieve(image_url, image_path)
+image_catalog = ImageCatalog(image_urls_path)
+image_path = image_catalog.get_image_path(image_index) 
 
 ####SONIFICATION################################
 
@@ -64,7 +56,7 @@ print('sonification duration: ',round(sonif_duration,2),'seconds')
 print('song duration: ',round(len(song.y)/song.sr,2),'seconds')
 
 sonification = Sonification(image_path, song, freqs, sonif_duration)  
-sonification.save_sonification('./sonifications/' + image_name + '.wav')
+sonification.save_sonification('./sonifications/' + image_catalog.get_image_name(image_index) + '.wav')
 
 #####MIXING####################################
 
@@ -91,4 +83,4 @@ else:
     wave_mix.ys = (1 - mix)*wave_song.ys + mix*sonification.y[:len(wave_song.ys)]
     
 wave_mix.normalize(0.9)
-wave_mix.write('./mixes/' + audio_filename + ' + ' +image_name + '.wav')
+wave_mix.write('./mixes/' + audio_filename + ' + ' +image_catalog.get_image_name(image_index) + '.wav')
