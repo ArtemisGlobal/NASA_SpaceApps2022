@@ -115,11 +115,7 @@ If you are logged in as a public profile, you may only retrieve data, you may no
 ## DATA AND RESOURCES:
 
 
-WebbTelescope.org
-
-Image Resources
-
-A developing gallery of images featuring astronomical observations and informative science content around the Webb telescope (JWST) mission. (72 kB)
+WebbTelescope.org (Image Resources): A developing gallery of images featuring astronomical observations and informative science content around the Webb telescope (JWST) mission. (72 kB)
 
 
 
@@ -131,13 +127,12 @@ The Mikulski Archive for Space Telescopes (MAST) Portal lets astronomers search 
 
 
 
-jackmcarthur/musical-key-finder
-
-A python project that uses several standard/otherwise very common libraries to determine the key that a song (an .mp3) is in, i.e. F major or C# minor, with annotations and some examples.
+jackmcarthur/musical-key-finder: A python project that uses several standard/otherwise very common libraries to determine the key that a song (an .mp3) is in, i.e. F major or C# minor, with annotations and some examples.
 
 
 
 Barbara A. Mikulski Archive for Space Telescopes (MAST) dataset
+
 
 https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html
 
@@ -145,13 +140,30 @@ https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html
 
 
 ## TOOLS:
+
 Jupyter Notebook
+
+
 Python
+
+
 MySQL
+
+
 Figma
+
+
 Wix
+
+
 Canva
+
+
 Musical-key-finder package: https://github.com/jackmcarthur/musical-key-finder
+
+
 Wav file writer package: Think DSP: Digital Signal Processing in Python 1st Edition by Allen B. Downey
+
+
 Other python libraries: librosa, PIL, pandas, lumpy, audiolazy, pydub, urllib
 
