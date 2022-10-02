@@ -21,8 +21,6 @@ You could find the detail code in this repo, especially in the `/audio_match_son
 
 
 
-## Installation Locally or on Server
-
 ## Requirements
 
 Python 3.7+ is required.  
