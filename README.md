@@ -10,13 +10,17 @@ Team Artemis [https://2022.spaceappschallenge.org/challenges/2022-challenges/ste
 https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project) in Washington D.C.
 
 ## Overview
-Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details]( https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details). We chose different images collected by James Webb Space Telescope, and transformed them into music. We also set up a web application to let user interact with our program. Specifically, the user can upload a custom audio and choose a image. We transform the image into sound and combine it with the audio that the user provided to create new style of music. This Github repo mainly shows the core algorithm that:
+Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details]( https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details). We chose different images collected by James Webb Space Telescope, and transformed them into music. We also set up a web application to let user interact with our program. Specifically, the user can upload a custom audio and choose a image. We transform the image into sound and combine it with the audio that the user provided to create a new experience that connects the personal with the cosmic.
+
+This Github repo shows the core algorithm that:
 - loads an audio file
 - extracts the key and tempo
-- downloads and loads an image
-- converts the image to audio with musical inverse spectrogram technique such that it can be combined with the original audio file.
+- downloads and loads an image from a catalog
+- converts the image to audio with a musical inverse spectrogram technique such that it can be combined with the original audio file.
 
-You can find a working example in `audio_match_sonification.ipynb` or `audio_match_sonification.py`. Within these files you will set the name of the song (an mp3 or wav file of the song must exist in `/songs`). You will also select the image from the catalog `WebbDemo.csv` by setting its index number within either `audio_match_sonification`. Running `audio_match_sonification.py` will generate an audio file of the image sonification in `/sonification` and a mix of the sonification and original audio in `/mixes`.
+Future development will include tonal and instrumental options for the sonification to respond to user's personalization.
+
+You can find a working example in `audio_match_sonification.ipynb` or `audio_match_sonification.py`. Within these files you will set the name of the song (an mp3 or wav file of the song must exist in `/songs`). You will also select the image from the catalog `WebbDemo.csv` by setting its index number. Running `audio_match_sonification.py` will generate an audio file of the image sonification in `/sonification` and a mix of the sonification and original audio in `/mixes`.
 
 
 
