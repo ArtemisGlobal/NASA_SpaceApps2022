@@ -108,7 +108,7 @@ class Tonal_Fragment(object):
         
         
 def get_scale_notes(start_note='C1', octaves=3, scale='majorHex'):
-    #Returns a list of Diatonic Notes in the Mode
+    #Returns a list of Diatonic Notes
     
     scales = {
     'ionian':[2,2,1,2,2,2,1],
@@ -154,7 +154,13 @@ def get_scale_freqs(start_note='C1', octaves=3, scale='majorHex'):
     return scale_freqs
 
 def boost_contrast(image): 
-        '''boost contrast in current image with cosine curve'''
+        """boost contrast in current image with cosine curve
+        
+        argument:PIL image (RGB)
+        
+        returns: PIL image (RGB)
+        """
+        
         im_array = np.array(image)
         im_array = 255./2*(1 - np.cos(np.pi*im_array/np.amax(im_array)))
         #im_array = map_value(-np.cos(np.pi*im_array/np.amax(im_array)), -1, 1, 0, 255)
