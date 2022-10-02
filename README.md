@@ -1,6 +1,14 @@
 # NASA_SpaceApps2022
+
+
 NASA Space Apps Challenge 2022
-Team Artemis [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project]( https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project) in Washington D.C.
+
+
+Team Artemis [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project]( 
+
+
+https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project) in Washington D.C.
+
 
 Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details]( https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details). We chose different images collected by James Webb Space Telescope, and transformed them into music. We also set up a web application to let user interact with our program. Specifically, the user can upload a custom audio and choose a image, we transform the image into sound and match with the audio that the user provided to create new style music. This Github repo mainly shows the core algorithm that we do load audio file, extract keys, load image, convert to audio with musical inverse spectrogram technique, and sonification.
 
@@ -10,7 +18,7 @@ Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.
 
 
 
-API
+### API
 The server is currently deployed on an AWS EC2 instance, its address is http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/. The API uses sessions to keep track of current users and securely authenticate cookies. In order to interact with the API you must be logged in, without logging in first you will be denied access. Since there are different levels of access, public, mission control, or researcher you must be authenticated to get the appropriate level of access.
 
 Logging In
@@ -52,7 +60,7 @@ If you are logged in as a public profile, you may only retrieve data, you may no
 Curl is a common command line utility that is used for interacting with URLs.
 
 #### Logging in
-`curl http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login -F 'username=DaveB' -F 'password=1523#' --cookie cookies.txt --cookie-jar newcookies.txt` 
+`curl http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login -F 'username=Matt' -F 'password=1523#' --cookie cookies.txt --cookie-jar newcookies.txt` 
 This generates a file called `newcookies.txt` that will contain the cookie that is needed to interact with the API for the user `DaveB`.
 
 You can also visit [http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login](http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login) in the browser and use the logins below to have the browser maintain your cookies. 
