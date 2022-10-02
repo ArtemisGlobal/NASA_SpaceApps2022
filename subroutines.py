@@ -98,29 +98,16 @@ class Sonification():
         self.wave.write(path)
         
     def mix_audio(self,mix):
-        # mix = 0.4 #0 to 1 
-
-#         wave_mix = self.song.wave.copy()
-#         if len(self.y)<len(self.song.y):
-#             n_samp = 0
-#             n_sonf_samp = len(self.y)
-#             while n_samp<len(self.song.y)- n_sonf_samp:
-#                 wave_mix.ys[n_samp:n_samp + n_sonf_samp] = (1 - mix)*self.song.y[n_samp:n_samp + n_sonf_samp] + mix*self.y
-#                 n_samp += len(self.y)
-#         else:
-#             wave_mix.ys = (1 - mix)*self.song.y + mix*self.y[:len(self.song.y)]
             
         wave_mix = self.song.wave.copy()
-        if len(self.y)<len(self.song.wave.ts):
-            n_samp = 0
-            n_sonf_samp = len(self.y)
-            while n_samp<len(self.song.wave.ts)- n_sonf_samp:
-                wave_mix.ys[n_samp:n_samp + n_sonf_samp] = (1 - mix)*self.song.wave.ys[n_samp:n_samp + n_sonf_samp] + mix*self.y
-                n_samp += len(self.y)
+        if len(self.y)<len(self.song.wave.ys):
+            n_sonf = len(self.y)
+            n_copies = len(self.song.wave.ys)//n_sonf
+            for i in range(n_copies):
+                wave_mix.ys[i*n_sonf:(i+1)*n_sonf] = (1 - mix)*self.song.wave.ys[i*n_sonf:(i+1)*n_sonf] + mix*self.y
         else:
-            wave_mix.ys = (1 - mix)*self.song.wave.ys + mix*self.y[:len(wave_song.ys)]
+            wave_mix.ys = (1 - mix)*self.song.wave.ys + mix*self.y[:len(self.song.wave.ys)]
 
-    
         wave_mix.normalize(0.9)
         self.mix = wave_mix
         

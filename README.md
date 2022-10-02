@@ -16,7 +16,7 @@ Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.
 - downloads and loads an image
 - converts the image to audio with musical inverse spectrogram technique such that it can be combined with the original audio file.
 
-You can find the detailed code in this repo, especially in the `audio_match_sonification.ipynb` or `audio_match_sonification.py` files. Within these files you will choose the song name (an mp3 or wav file must be in `/songs`). You can also select the image from the catalog `WebbDemo.csv` by setting its index number within either `audio_match_sonification`. Running `audio_match_sonification.py` will generate an audio file of the image sonification in `/sonification` and a mix of the sonification and original audio in `/mixes`.
+You can find a working example in `audio_match_sonification.ipynb` or `audio_match_sonification.py`. Within these files you will set the name of the song (an mp3 or wav file of the song must exist in `/songs`). You will also select the image from the catalog `WebbDemo.csv` by setting its index number within either `audio_match_sonification`. Running `audio_match_sonification.py` will generate an audio file of the image sonification in `/sonification` and a mix of the sonification and original audio in `/mixes`.
 
 
 
