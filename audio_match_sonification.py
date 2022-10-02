@@ -61,27 +61,31 @@ sonification.save_sonification('./sonifications/' + image_catalog.get_image_name
 
 #####MIXING####################################
 
-#make sure there is a wav version, needed to load with thinkdsp
-if '.wav' in audio_path:
-    wave_song = read_wave(audio_path)
-elif '.mp3' in audio_path:
-    try:
-        wave_song = read_wave(audio_path.strip('mp3') + 'wav')
-    except:
-        sound = AudioSegment.from_mp3(audio_path)
-        sound.export(audio_path.strip('mp3') + 'wav', format="wav")
-        wave_song = read_wave(audio_path.strip('mp3') + 'wav')
+# #make sure there is a wav version, needed to load with thinkdsp
+# if '.wav' in audio_path:
+#     wave_song = read_wave(audio_path)
+# elif '.mp3' in audio_path:
+#     try:
+#         wave_song = read_wave(audio_path.strip('mp3') + 'wav')
+#     except:
+#         sound = AudioSegment.from_mp3(audio_path)
+#         sound.export(audio_path.strip('mp3') + 'wav', format="wav")
+#         wave_song = read_wave(audio_path.strip('mp3') + 'wav')
 
-wave_mix = wave_song.copy()
+sonification.mix_audio(mix) #mix sonfiication with audio,  mix is fraction of sonification
+sonification.mix.write('./mixes/' + audio_filename + ' + ' +image_catalog.get_image_name(image_index) + '.wav')
 
-if len(sonification.y)<len(wave_song.ts):
-    n_samp = 0
-    n_sonf_samp = len(sonification.y)
-    while n_samp<len(wave_song.ts)- n_sonf_samp:
-        wave_mix.ys[n_samp:n_samp + n_sonf_samp] = (1 - mix)*wave_song.ys[n_samp:n_samp + n_sonf_samp] + mix*sonification.y
-        n_samp += len(sonification.y)
-else:
-    wave_mix.ys = (1 - mix)*wave_song.ys + mix*sonification.y[:len(wave_song.ys)]
+# mix=0.6
+# wave_mix = song.wave.copy()
+
+# if len(sonification.y)<len(song.wave.ys):
+#     n_samp = 0
+#     n_sonf_samp = len(sonification.y)
+#     while n_samp<len(song.wave.ys)- n_sonf_samp:
+#         wave_mix.ys[n_samp:n_samp + n_sonf_samp] = (1 - mix)*song.wave.ys[n_samp:n_samp + n_sonf_samp] + mix*sonification.y
+#         n_samp += len(sonification.y)
+# else:
+#     wave_mix.ys = (1 - mix)*song.wave.ys + mix*sonification.y[:len(wave_song.ys)]
     
-wave_mix.normalize(0.9)
-wave_mix.write('./mixes/' + audio_filename + ' + ' +image_catalog.get_image_name(image_index) + '.wav')
+# wave_mix.normalize(0.9)
+# wave_mix.write('./mixes/' + audio_filename + ' + ' +image_catalog.get_image_name(image_index) + '.wav')

@@ -9,6 +9,7 @@ import urllib.request
 class Song():
     def __init__(self, audio_path, tend=22):
         self.audio_path = audio_path
+        self._make_song_wave()
         self.tend = tend
         self._load()
         self._get_key()
@@ -36,6 +37,16 @@ class Song():
         self.tempo = librosa.beat.tempo(onset_envelope=onset_env, sr=self.sr)[0]
         print('likely tempo: ',self.tempo,'bpm')
         
+    def _make_song_wave(self):
+        if '.wav' in self.audio_path:
+            self.wave = read_wave(self.audio_path)
+        elif '.mp3' in self.audio_path:
+            try:
+                self.wave = read_wave(self.audio_path.strip('mp3') + 'wav')
+            except:
+                sound = AudioSegment.from_mp3(self.audio_path)
+                sound.export(self.audio_path.strip('mp3') + 'wav', format="wav")
+                self.wave = read_wave(selfong.audio_path.strip('mp3') + 'wav')
         
 class ImageCatalog():
     def __init__(self,image_csv_path):
@@ -85,6 +96,34 @@ class Sonification():
         
     def save_sonification(self,path):
         self.wave.write(path)
+        
+    def mix_audio(self,mix):
+        # mix = 0.4 #0 to 1 
+
+#         wave_mix = self.song.wave.copy()
+#         if len(self.y)<len(self.song.y):
+#             n_samp = 0
+#             n_sonf_samp = len(self.y)
+#             while n_samp<len(self.song.y)- n_sonf_samp:
+#                 wave_mix.ys[n_samp:n_samp + n_sonf_samp] = (1 - mix)*self.song.y[n_samp:n_samp + n_sonf_samp] + mix*self.y
+#                 n_samp += len(self.y)
+#         else:
+#             wave_mix.ys = (1 - mix)*self.song.y + mix*self.y[:len(self.song.y)]
+            
+        wave_mix = self.song.wave.copy()
+        if len(self.y)<len(self.song.wave.ts):
+            n_samp = 0
+            n_sonf_samp = len(self.y)
+            while n_samp<len(self.song.wave.ts)- n_sonf_samp:
+                wave_mix.ys[n_samp:n_samp + n_sonf_samp] = (1 - mix)*self.song.wave.ys[n_samp:n_samp + n_sonf_samp] + mix*self.y
+                n_samp += len(self.y)
+        else:
+            wave_mix.ys = (1 - mix)*self.song.wave.ys + mix*self.y[:len(wave_song.ys)]
+
+    
+        wave_mix.normalize(0.9)
+        self.mix = wave_mix
+        
         
 #From: https://github.com/jackmcarthur/musical-key-finder 
 # class that uses the librosa library to analyze the key that an mp3 is in
