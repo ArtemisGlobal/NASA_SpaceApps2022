@@ -4,15 +4,19 @@
 NASA Space Apps Challenge 2022
 
 
-Team Artemis [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project]( 
+Team Artemis [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project](
 
 
 https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project) in Washington D.C.
 
 ## Overview
-Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details]( https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details). We chose different images collected by James Webb Space Telescope, and transformed them into music. We also set up a web application to let user interact with our program. Specifically, the user can upload a custom audio and choose a image, we transform the image into sound and match with the audio that the user provided to create new style music. This Github repo mainly shows the core algorithm that load an audio file, extracts the key and tempo, loads an image, and then converts it to audio with musical inverse spectrogram technique such that it can be combined with the original audio file. 
+Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details]( https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details). We chose different images collected by James Webb Space Telescope, and transformed them into music. We also set up a web application to let user interact with our program. Specifically, the user can upload a custom audio and choose a image. We transform the image into sound and combine it with the audio that the user provided to create new style of music. This Github repo mainly shows the core algorithm that:
+- loads an audio file
+- extracts the key and tempo
+- downloads and loads an image
+- converts the image to audio with musical inverse spectrogram technique such that it can be combined with the original audio file.
 
-You can find the detailed code in this repo, especially in the `audio_match_sonification.ipynb` or `audio_match_sonification.py` files. Within these files you will choose the song name (an mp3 or wav file must be in `/songs`). You can also select the image from the catalog `WebbDemo.csv` by setting its index number. Running `/audio_match_sonification.py` will generate an audio file of the image sonification in `/sonification` and a mix of the sonification and original audio in `/mixes`. 
+You can find the detailed code in this repo, especially in the `audio_match_sonification.ipynb` or `audio_match_sonification.py` files. Within these files you will choose the song name (an mp3 or wav file must be in `/songs`). You can also select the image from the catalog `WebbDemo.csv` by setting its index number within either `audio_match_sonification`. Running `audio_match_sonification.py` will generate an audio file of the image sonification in `/sonification` and a mix of the sonification and original audio in `/mixes`.
 
 
 
@@ -54,7 +58,7 @@ source Hackathon/bin/activate
 After Python is installed, install the Python packages using:
 
 ```shell
-python3 -m venv hackathon 
+python3 -m venv hackathon
 source hackathon/bin/activate
 pip install -r requirements.txt
 ```
@@ -166,4 +170,3 @@ Wav file writer package: Think DSP: Digital Signal Processing in Python 1st Edit
 
 
 Other python libraries: librosa, PIL, pandas, lumpy, audiolazy, pydub, urllib
-
