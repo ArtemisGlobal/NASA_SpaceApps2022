@@ -1,0 +1,56 @@
+#!/bin/bash
+# db
+# Stop on errors
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+# Sanity check command line options
+
+usage() {
+  echo "Usage: $0 (create|destroy|reset|dump)" # $0 us the filename
+}
+# if number of arguments not equals 1: for './bin/nasa', '$#' will return 0
+if [ $# -ne 1 ]; then 
+  usage 
+  exit 1
+fi
+
+
+create() {
+  
+    mkdir -p var/uploads
+    sqlite3 var/nasa.sqlite3 < sql/createTable.sql # will automatically check whether database exists
+    # sqlite3 var/nasa.sqlite3 < sql/data.sql
+    sqlite3 var/nasa.sqlite3 > .mode csv images
+    sqlite3 var/nasa.sqlite3 > .import WebbDemo.csv images
+    cp sql/uploads/* var/uploads/ # wildcard
+}
+destory() {
+    rm -rf var/nasa.sqlite3 var/uploads # -f: never prompt, -r: recursive
+}
+dump() {
+    sqlite3 -batch -line var/nasa.sqlite3 'SELECT * FROM users' # pass code as argument
+    echo -e "\n"  # use -e to recognize escape
+    sqlite3 -batch -line var/nasa.sqlite3 'SELECT * FROM images'
+    echo -e "\n"
+    sqlite3 -batch -line var/nasa.sqlite3 'SELECT * FROM audio'
+}
+# Parse argument.  $1 is the first argument
+case $1 in
+  "create")
+    create
+    ;; # is used between cases
+  "destroy")
+    destory
+    ;;
+  "reset") # def destory + create
+    destory
+    create
+    ;;
+  "dump") # def print everything in the database
+    dump
+    ;;
+    *) # default condition
+    usage
+    exit 1
+    ;;
+esac
