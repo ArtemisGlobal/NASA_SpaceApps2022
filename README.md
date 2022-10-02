@@ -10,8 +10,6 @@ Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.
 
 
 
-This will provide a backend API for the spaceapps challenge based on Flask.
-
 API
 The server is currently deployed on an AWS EC2 instance, its address is http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/. The API uses sessions to keep track of current users and securely authenticate cookies. In order to interact with the API you must be logged in, without logging in first you will be denied access. Since there are different levels of access, public, mission control, or researcher you must be authenticated to get the appropriate level of access.
 
@@ -68,22 +66,22 @@ This can be done by logging in and going to [http://ec2-18-221-105-205.us-east-2
 $ curl http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/meidas --cookie newcookies.txt
 [
   {
-    "audioref": "",
-    "imageref": "Im123",
-    "mediaID": 1,
-    "videoref": ""
+    "ImageName": "'Cosmic Cliffs' in the Carina Nebula",
+    "FileDir": "https://stsci-opo.org/STScI-01GA6KNV1S3TP2JBPCDT8G826T.png",
+    "CollectDate": "6/3/22'",
+    "Instrument": "NIRCam"
   },
   {
-    "audioref": "Aud123",
-    "imageref": "",
-    "mediaID": 2,
-    "videoref": ""
+    "ImageName": "“Cosmic Cliffs” in the Carina Nebula2",
+    "FileDir": "https://stsci-opo.org/STScI-01G8GYE2PQWY96TDX66CHQRMPQ.png",
+    "CollectDate": "6/11/22",
+    "Instrument": "NIRCam, MIRI"
   },
   {
-    "audioref": "",
-    "imageref": "",
-    "mediaID": 3,
-    "videoref": "Vid123"
+    "ImageName": "Stephan's Quintet",
+    "FileDir": "https://stsci-opo.org/STScI-01G8H4DRM2C010PX6T3DPEEDAW.png",
+    "CollectDate": "7/1/22",
+    "Instrument": "NIRCam, MIRI"
   }
 ]
 ```
@@ -109,9 +107,10 @@ These can also be achieved with CURL by using `CURL -X POST` and making a JSON o
 
 | username | password | firstname | lastname  | company         | role            |
 |----------|----------|-----------|-----------|-----------------|-----------------|
-| ChrisN   | 1234!    | Christine | Nolan     | Hubbal Finacial | researcher      |
-| DaveB    | 1523#    | Dave      | Borncamp  | Ball Corp.      | mission control |
-| RuthF    | 9875$    | Ruth      | Fantastic | Student         | public          |
+| ChrisN   | 1234!    | Christine | Nolan     | Hubbal Finacial | Team Lead       |
+| Matt     | 1523#    | Matt      | Russo     | Univ of Toronto | mission control |
+| Leo      | 9875$    | Leo       | Bueno     | Student         | web dev         |
+| Yichen   | 4321@    | Yichen    | Zhong     | Student         | web dev         |
 
 
 ## Installation Locally or on Server
