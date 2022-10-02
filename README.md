@@ -20,7 +20,7 @@ To log in go to the /login endpoint at http://ec2-18-221-105-205.us-east-2.compu
 
 If you are logged in as a public profile, you may only retrieve data, you may not input any kind of data. If you are logged in as not public, you can upload meida and logs to the database as well as retrieve.
 
-### `/login
+### `/login`
 - GET - You can perform a get request ot login to the server. It will return a cookie to be used for all other sessions
 
 ### `/logs`
