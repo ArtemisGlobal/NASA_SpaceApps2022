@@ -44,19 +44,21 @@ If you are logged in as a public profile, you may only retrieve data, you may no
 
 
 
-
-
-Examples Using CURL
+### Examples Using CURL
 Curl is a common command line utility that is used for interacting with URLs.
 
-Logging in
-curl http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login -F 'username=DaveB' -F 'password=1523#' --cookie cookies.txt --cookie-jar newcookies.txt This generates a file called newcookies.txt that will contain the cookie that is needed to interact with the API for the user DaveB.
+#### Logging in
+`curl http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login -F 'username=DaveB' -F 'password=1523#' --cookie cookies.txt --cookie-jar newcookies.txt` 
+This generates a file called `newcookies.txt` that will contain the cookie that is needed to interact with the API for the user `DaveB`.
 
-You can also visit http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login in the browser and use the logins below to have the browser maintain your cookies.
+You can also visit [http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login](http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/login) in the browser and use the logins below to have the browser maintain your cookies. 
 
-Getting Data
-For this example we will look at getting the medias out of the server. This can be done by logging in and going to http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/meidas in your browser or using CURL:
+#### Getting Data
 
+For this example we will look at getting the medias out of the server.
+This can be done by logging in and going to [http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/meidas](http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/medias) in your browser or using CURL:
+
+```bash
 $ curl http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/meidas --cookie newcookies.txt
 [
   {
@@ -78,39 +80,66 @@ $ curl http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/meidas --c
     "videoref": "Vid123"
   }
 ]
-Logging Out
-Logging out is easy, it will invalidate the session associated with that cookie. To do so, visit http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/logout in your browser or use curl:
+```
 
+#### Logging Out
+
+Logging out is easy, it will invalidate the session associated with that cookie.
+To do so, visit [http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/logout](http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/logout) in your browser or use curl:
+
+```bash
 $ curl http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/logout --cookie newcookies.txt
+```
+
 This will invalidate the session on the server and the cookie in the file can be deleted.
 
-Adding Data
-The easiest way to upload data is through the browser by filling out the forms at http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/logs/add and http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/medias/add. These can also be achieved with CURL by using CURL -X POST and making a JSON object that contains the appropriate information.
 
-Current Active Test Users
-username	password	firstname	lastname	company	role
-ChrisN	1234!	Christine	Nolan	Hubbal Finacial	researcher
-DaveB	1523#	Dave	Borncamp	Ball Corp.	mission control
-RuthF	9875$	Ruth	Fantastic	Student	public
-Installation Locally or on Server
-MySQL needs to be installed and started. I followed this guide to get mysql installed and running on Ubuntu (Linux).
+### Adding Data
 
-Once MySQL is installed, we need to install python 3.8.5. Install Python 3.8.10
+The easiest way to upload data is through the browser by filling out the forms at [http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/logs/add](http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/logs/add) and [http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/medias/add](http://ec2-18-221-105-205.us-east-2.compute.amazonaws.com:5000/medias/add).
+These can also be achieved with CURL by using `CURL -X POST` and making a JSON object that contains the appropriate information.
+
+## Current Active Test Users
+
+| username | password | firstname | lastname  | company         | role            |
+|----------|----------|-----------|-----------|-----------------|-----------------|
+| ChrisN   | 1234!    | Christine | Nolan     | Hubbal Finacial | researcher      |
+| DaveB    | 1523#    | Dave      | Borncamp  | Ball Corp.      | mission control |
+| RuthF    | 9875$    | Ruth      | Fantastic | Student         | public          |
+
+
+## Installation Locally or on Server
+
+MySQL needs to be installed and started.
+I followed [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04) to get mysql installed and running on Ubuntu (Linux).
+
+Once MySQL is installed, we need to install python 3.8.5.
+Install [Python 3.8.10](https://www.python.org/downloads/release/python-3810/)
 
 The commands are:
 
+```bash
 sudo apt install python3-pip mysql-server python3.8-venv libmysqlclient-dev default-libmysqlclient-dev
 
 sudo mysql_secure_installation
+```
+
 After Python is installed, install the Python packages using:
 
+```shell
 python3 -m venv hackathon 
 source hackathon/bin/activate
 pip install -r requirements.txt
-Running
-After things have been installed, the server can be started. We will need to export the name of the file to run.
+```
 
+## Running
+
+After things have been installed, the server can be started.
+We will need to export the name of the file to run.
+
+```shell
 EXPORT FLASK_APP=api
 flask run --host=0.0.0.0
-This will run the Flask API server on the machine, defaulting to port 5000.
+```
 
+This will run the Flask API server on the machine, defaulting to port 5000.
