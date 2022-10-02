@@ -10,7 +10,7 @@ Team Artemis [https://2022.spaceappschallenge.org/challenges/2022-challenges/ste
 https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/teams/team-artemis-2/project) in Washington D.C.
 
 ## Overview
-Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details]( https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details). We chose different images collected by James Webb Space Telescope, and transformed them into music. We also set up a web application to let user interact with our program. Specifically, the user can upload a custom audio and choose a image. We transform the image into sound and combine it with the audio that the user provided to create a new experience that connects the personal with the cosmic.
+Our challenge topic is Turning STEM into STEAM [https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details]( https://2022.spaceappschallenge.org/challenges/2022-challenges/steam/details). We chose different images collected by James Webb Space Telescope, and wrote a script that transforms them into music. We also set up a web application to let user interact with our program. Specifically, the user can upload a custom audio file and choose a celestial image that was captured on a day of personal significance. We transform the image into sound and combine it with the audio that the user provided to create a new experience that connects the personal with the cosmic.
 
 This Github repo shows the core algorithm that:
 - loads an audio file
