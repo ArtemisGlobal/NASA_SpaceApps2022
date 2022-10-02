@@ -35,6 +35,30 @@ class Song():
         self.tempo = librosa.beat.tempo(onset_envelope=onset_env, sr=self.sr)[0]
         print('likely tempo: ',self.tempo)
         
+class Sonification():
+    def __init__(self, image_path,song,freqs,sonif_duration):
+        self.image_path = image_path
+        self.song = song
+        self.freqs = freqs
+        self.sonif_duration = sonif_duration
+        self._get_pixels()
+        self._make_sonification()
+        
+    def _get_pixels(self):
+        img = Image.open(self.image_path) 
+        img = boost_contrast(img) #makes structure easier to hear
+
+        imgR = img.resize(size = (img.width,len(self.freqs)), resample=Image.LANCZOS) 
+        self.pixels = np.array(imgR.convert('L'))/255 #normalize
+        
+    def _make_sonification(self):
+        self.wave = additive_synth(self.pixels, self.freqs, self.song.sr, self.sonif_duration)
+        self.wave.normalize(0.9)
+        self.y = self.wave.ys
+        
+    def save_sonification(self,path):
+        self.wave.write(path)
+        
 #From: https://github.com/jackmcarthur/musical-key-finder 
 # class that uses the librosa library to analyze the key that an mp3 is in
 # arguments:
