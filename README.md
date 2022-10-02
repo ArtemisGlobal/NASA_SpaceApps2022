@@ -58,19 +58,35 @@ If you are logged in as a public profile, you may only retrieve data, you may no
 
 ## Installation Locally or on Server
 
-MySQL needs to be installed and started.
-I followed [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04) to get mysql installed and running on Ubuntu (Linux).
+## Requirements
 
-Once MySQL is installed, we need to install python 3.8.5.
-Install [Python 3.8.10](https://www.python.org/downloads/release/python-3810/)
+Python 3.7+ is required.  
 
-The commands are:
+We recommend [Anaconda](https://www.continuum.io/downloads/) which comes with a suite of packages useful for scientific data analysis. Step-by-step instructions for installing Anaconda can be found at: [Windows](https://docs.anaconda.com/anaconda/install/windows/), [macOS](https://docs.anaconda.com/anaconda/install/mac-os/), [Linux](https://docs.anaconda.com/anaconda/install/linux/)
+
+## Installation
+
+### Setup your Virtual Environment
+To avoid potential dependency issues with other Python packages, we suggest creating a virtual environment for this project; you can create a virtual environment in your terminal with:
 
 ```bash
-sudo apt install python3-pip mysql-server python3.8-venv libmysqlclient-dev default-libmysqlclient-dev
-
-sudo mysql_secure_installation
+python -m venv Hackathon
 ```
+
+To enter your virtual environment, run the 'activate' script:
+
+#### Windows
+
+```bash
+.\Hackathon\Scripts\activate
+```
+
+#### macOS and Linux
+
+```bash
+source Hackathon/bin/activate
+```
+
 
 After Python is installed, install the Python packages using:
 
